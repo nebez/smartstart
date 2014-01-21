@@ -15,12 +15,12 @@ SmartStart stores all settings/user information locally in the web browser, and 
 - Retrieves a number of postings from your favorite subreddit
 - Drag, drop, add, and edit your bookmarks right in the SmartStart homepage
 
-Live Demo
+Live App
 ------------
 Check out a live preview of it over here.  
-http://nebezb.com/projects/smartstart/
+http://nebez.github.io/smartstart/
 
-Keep in mind this is a live preview, you shouldn't use this as your homepage. I will be constantly updating and changing the contents of that live preview (but mostly don't use it because my budget web hosting plan is... bad). Instead, grab a copy of the web app, save it, open it up and you'll save yourself the load time and me the bandwidth!
+If for some reason you don't want to download it and run it locally, you can use the link above the live preview above as your homepage. I can't promise it'll be up forever, but it will be kept updated for you with the latest changes automatically.
 
 Download
 ---
