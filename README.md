@@ -25,7 +25,7 @@ If for some reason you don't want to download it and run it locally, you can use
 Download
 ---
 Look to the right and find that "Download as Zip" button. Everything you need is right there!  
-Can't find it? Here's the download link: https://github.com/nebez/smartstart/archive/master.zip
+Can't find it? Here's the download link: https://github.com/nebez/smartstart/archive/gh-pages.zip
 
 Browser Integration
 ---
