@@ -20,7 +20,7 @@ Live App
 Check out a live preview of it over here.  
 http://nebez.github.io/smartstart/
 
-If for some reason you don't want to download it and run it locally, you can use the link above the live preview above as your homepage. I can't promise it'll be up forever, but it will be kept updated for you with the latest changes automatically.
+If for some reason you don't want to download it and run it locally, you can use the link above as your homepage. I can't promise it'll be up forever, but it will be kept updated for you with the latest changes automatically.
 
 Download
 ---
