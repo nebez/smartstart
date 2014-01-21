@@ -26,3 +26,9 @@ Download
 ---
 Look to the right and find that "Download as Zip" button. Everything you need is right there!  
 Can't find it? Here's the download link: https://github.com/nebez/smartstart/archive/master.zip
+
+Browser Integration
+---
+Unfortunately, Google Chrome doesn't let you change the New Tab page without the use of an extension.  
+Changing your home page in the settings and pairing it with this extension should fix everything though!  
+https://chrome.google.com/webstore/detail/new-tab-redirect/icpgjfneehieebagbmdbhnlpiopdcmna

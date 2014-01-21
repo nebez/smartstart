@@ -43,9 +43,27 @@ $(document).ready(function(){
    //Populate our tile color selectors
    populateTileColorSelectors();
    
+   //Show project info dialog... maybe?
+   showProjectInfo();
+   
    //Finally, Focus the search box
    $("#searchbox").focus();
 });
+
+function showProjectInfo()
+{
+   if(window.location.host.toLowerCase().indexOf("nebezb.com") != -1)
+   {
+      //They're at nebezb.com, show them an alert.
+      var alerthtml = '<div class="alert alert-info alert-dismissable">';
+      alerthtml += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+      alerthtml += '<h2>Hey there!</h2><p>Thanks for checking out the SmartStart project. This is only a live preview, and not meant to be used as your actual homepage.</p>';
+      alerthtml += '<p>You can <a href="https://github.com/nebez/smartstart/archive/master.zip" class="alert-link">download this project here</a> or check out the <a href="https://github.com/nebez/smartstart" class="alert-link">GitHub repo here</a>.</p>';
+      alerthtml += '<p>Sorry for having to create this huge alert. You can close it (hit the X). Unfortunately, I need to show it. The project is meant to be downloaded and run locally, and I don\'t have the server power to host this for hundreds of users.</p>';
+      alerthtml += '</div>';
+      $(".container").prepend(alerthtml);
+   }
+}
 
 
 /////////////////////////////////////////////
