@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Smart Start</title>
+      
+      <!--
+      Copyright 2014 Nebez Briefkani
+
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+      You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
+    -->
+    
+    <!-- meta tags -->
+      <meta name="description" content="Smart Start" />
+      <meta name="keywords" content="smart,start,smartstart,new,tab,browser,ie,chrome,ff,firefox,internet,explorer,nebez,briefkani,nebezb" />
+      <meta name="author" content="Nebez Briefkani" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <meta http-equiv="content-language" content="en-us" />
+      <meta http-equiv="cleartype" content="on" />
+    
+      <!-- Bootstrap -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+      <!-- Styles -->
+      <link href="css/main.css" rel="stylesheet">
+      <!-- Google Web Fonts -->
+      <link href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'>
+   </head>
+   <body>
+   <div class="container">
+      <div class="row">
+         <div class="col-md-4">
+            <div id="weather" data-tilecolor="#76b7ee" data-location="Montreal,CA" data-units="metric" class="colorable box" data-colorable="border-bottom-color">
+               <div class="icon"><img src="img/icon-weather.png" class="colorable" data-colorable="background-color"></div>
+               <div class="content tab-content">
+                  <div class="tab-pane fade in active" id="weatherview">
+                     <h1 id="temperature"></h1><h4 id="condition"></h4>
+                     
+                     <div class="windows8 loader">
+                        <div class="wBall" id="wBall_1">
+                           <div class="colorable wInnerBall" data-colorable="background-color">
+                           </div>
+                        </div>
+                        <div class="wBall" id="wBall_2">
+                           <div class="colorable wInnerBall" data-colorable="background-color">
+                           </div>
+                        </div>
+                        <div class="wBall" id="wBall_3">
+                           <div class="colorable wInnerBall" data-colorable="background-color">
+                           </div>
+                        </div>
+                        <div class="wBall" id="wBall_4">
+                           <div class="colorable wInnerBall" data-colorable="background-color">
+                           </div>
+                        </div>
+                        <div class="wBall" id="wBall_5">
+                           <div class="colorable wInnerBall" data-colorable="background-color">
+                           </div>
+                        </div>
+                     </div>
+                     
+                  </div>
+                  <div class="tab-pane fade" id="weatheredit">
+                     <h2>Settings</h2>
+                     <br>
+                     <h4>Location</h4>
+                     <input id="weather-location" type="text" class="form-control" placeholder="Location (City,Country)">
+                     <br>
+                     <h4>Units</h4>
+                     <select id="weather-units" class="form-control">
+                        <option value="metric">Metric</option>
+                        <option value="imperial">Imperial</option>
+                     </select>
+                     <br>
+                     <h4>Tile Color</h4>
+                     <div class="tilecolorselector"></div>
+                     <br>
+                     <button type="button" class="btn btn-info save">Save</button><button type="button" class="btn btn-default cancel">Discard</button>
+                  </div>
+               </div>
+               <div class="edit"><a href="#weatheredit" data-placement="left" data-title="Configure" data-toggle="tab"><img src="img/icon-edit.png" class="colorable" data-colorable="background-color"></a></div>
+               <div class="clearfix"></div>
+            </div>
+         </div>
+         
+         <div class="col-md-4">
+            <div id="greeting" data-tilecolor="#65b676" data-fullname="Nebez" class="colorable box" data-colorable="border-bottom-color">
+               <div class="icon"><img src="img/icon-hand.png" class="colorable" data-colorable="background-color"></div>
+               <div class="content tab-content">
+                  <div class="tab-pane fade in active" id="greetingview">
+                     <h3 id="greet">Greeting...</h3><h2 id="name">Name...</h2>
+                  </div>
+                  <div class="tab-pane fade" id="greetingedit">
+                     <h2>Settings</h2>
+                     <br>
+                     <h4>Name</h4>
+                     <input id="greeting-fullname" type="text" class="form-control" placeholder="Your Name">
+                     <br>
+                     <h4>Tile Color</h4>
+                     <div class="tilecolorselector"></div>
+                     <br>
+                     <button type="button" class="btn btn-info save">Save</button><button type="button" class="btn btn-default cancel">Discard</button>
+                  </div>
+               </div>
+               <div class="edit"><a href="#greetingedit" data-placement="left" data-title="Configure" data-toggle="tab"><img src="img/icon-edit.png" class="colorable" data-colorable="background-color"></a></div>
+               <div class="clearfix"></div>
+            </div>
+         </div>
+         
+         <div class="col-md-4">
+            <div id="datetime" data-tilecolor="#e8c883" class="colorable box" data-colorable="border-bottom-color">
+               <div class="icon"><img src="img/icon-time.png" class="colorable" data-colorable="background-color"></div>
+               <div class="content tab-content">
+                  <div class="tab-pane fade in active" id="datetimeview">
+                     <h2 id="time">Time...</h2><h4 id="date">Date...</h4>
+                  </div>
+                  <div class="tab-pane fade" id="datetimeedit">
+                     <h2>Settings</h2>
+                     <br>
+                     <h4>Tile Color</h4>
+                     <div class="tilecolorselector"></div>
+                     <br>
+                     <button type="button" class="btn btn-info save">Save</button><button type="button" class="btn btn-default cancel">Discard</button>
+                  </div>
+               </div>
+               <div class="edit"><a href="#datetimeedit" data-placement="left" data-title="Configure" data-toggle="tab"><img src="img/icon-edit.png" class="colorable" data-colorable="background-color"></a></div>
+               <div class="clearfix"></div>
+            </div>
+         </div>
+      </div>
+      
+      <div class="row">
+         <div class="col-md-12">
+            <div id="search" data-tilecolor="#c35993" data-searchengine="google" class="colorable box" data-colorable="border-bottom-color">
+               <div class="icon"><img src="img/icon-search.png" class="colorable" data-colorable="background-color"></div>
+               <div class="content tab-content">
+                  <div class="tab-pane fade in active" id="searchview">
+                     <input id="searchbox" type="text" class="colorable form-control input-lg" data-colorable="color" placeholder="Search the web...">
+                  </div>
+                  <div class="tab-pane fade" id="searchedit">
+                     <h2>Settings</h2>
+                     <br>
+                     <h4>Search Engine</h4>
+                     <select id="search-searchengine" class="form-control">
+                        <option value="google">Google</option>
+                        <option value="yahoo">Yahoo</option>
+                        <option value="bing">Bing</option>
+                     </select>
+                     <br>
+                     <h4>Tile Color</h4>
+                     <div class="tilecolorselector"></div>
+                     <br>
+                     <button type="button" class="btn btn-info save">Save</button><button type="button" class="btn btn-default cancel">Discard</button>
+                  </div>
+               </div>
+               <div class="edit"><a href="#searchedit" data-placement="left" data-title="Configure" data-toggle="tab"><img src="img/icon-edit.png" class="colorable" data-colorable="background-color"></a></div>
+               <div class="clearfix"></div>
+            </div>
+         </div>
+      </div>
+      
+      <div class="row">
+         <div class="col-md-6">
+            <div id="reddit" data-tilecolor="#e16161" data-subreddit="/r/All/hot" data-numposts="5" class="colorable box" data-colorable="border-bottom-color">
+               <div class="icon"><img src="img/icon-reddit.png" class="colorable" data-colorable="background-color"></div>
+               <div class="content tab-content">
+                  <div class="tab-pane fade in active" id="redditview">
+                     <h2>Reddit</h2>
+                     <h4 id="subname"></h4>
+                     <div class="inner">
+                        <table id="redditposts" class="table">
+                           <tbody>
+                              <!-- Reddit posts go here! :D -->
+                           </tbody>
+                        </table>
+                        
+                        <div class="windows8 loader">
+                           <div class="wBall" id="wBall_1">
+                              <div class="colorable wInnerBall" data-colorable="background-color">
+                              </div>
+                           </div>
+                           <div class="wBall" id="wBall_2">
+                              <div class="colorable wInnerBall" data-colorable="background-color">
+                              </div>
+                           </div>
+                           <div class="wBall" id="wBall_3">
+                              <div class="colorable wInnerBall" data-colorable="background-color">
+                              </div>
+                           </div>
+                           <div class="wBall" id="wBall_4">
+                              <div class="colorable wInnerBall" data-colorable="background-color">
+                              </div>
+                           </div>
+                           <div class="wBall" id="wBall_5">
+                              <div class="colorable wInnerBall" data-colorable="background-color">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <div class="tab-pane fade" id="redditedit">
+                     <h2>Settings</h2>
+                     <br>
+                     <h4>Subreddit</h4>
+                     <input id="reddit-subreddit" type="text" class="form-control" placeholder="Subreddit (/r/example/top)">
+                     <br>
+                     <h4>Postings</h4>
+                     <input id="reddit-numposts" type="text" class="form-control" placeholder="# of Postings (1-100)">
+                     <br>
+                     <h4>Tile Color</h4>
+                     <div class="tilecolorselector"></div>
+                     <br>
+                     <button type="button" class="btn btn-info save">Save</button><button type="button" class="btn btn-default cancel">Discard</button>
+                  </div>
+               </div>
+               <div class="edit"><a href="#redditedit" data-placement="left" data-title="Configure" data-toggle="tab"><img src="img/icon-edit.png" class="colorable" data-colorable="background-color"></a></div>
+               <div class="clearfix"></div>
+            </div>
+         </div>
+         
+         <div class="col-md-6">
+            <div id="bookmarks" data-tilecolor="#b68ee3" class="colorable box" data-colorable="border-bottom-color" data-encodedbookmarks="eyJib29rbWFya3MiOlt7InVybCI6Imh0dHA6Ly9nb29nbGUuY2EvIiwidGl0bGUiOiJnb29nbGUifSx7InVybCI6Imh0dHA6Ly90d2l0Y2gudHYvIiwidGl0bGUiOiJ0d2l0Y2gifSx7InVybCI6Imh0dHA6Ly9mYWNlYm9vay5jb20vIiwidGl0bGUiOiJmYWNlYm9vayJ9LHsidXJsIjoiaHR0cDovL2dtYWlsLmNvbS8iLCJ0aXRsZSI6ImdtYWlsIn0seyJ1cmwiOiJodHRwOi8vcmVkZGl0LmNvbS8iLCJ0aXRsZSI6InJlZGRpdCJ9LHsidXJsIjoiaHR0cDovL21haWwubGl2ZS5jb20vIiwidGl0bGUiOiJsaXZlIG1haWwifSx7InVybCI6Imh0dHA6Ly95b3V0dWJlLmNvbS8iLCJ0aXRsZSI6InlvdXR1YmUifV19">
+               <div class="icon"><img src="img/icon-star.png" class="colorable" data-colorable="background-color"></div>
+               <div class="content tab-content">
+                  <h2>Bookmarks</h2>
+                  <h4 id="bookmarkcount"></h4>
+                  <div class="inner">
+                     <ul class="list-inline">
+                        <!-- Bookmarks go here! -->
+                     </ul>
+                  </div>
+                  <!-- Editing bookmarks tab is different. We make clicks clickable that open modals to modify titles and links -->
+                  <div class="tab-pane fade in active" id="bookmarksview">
+                  </div>
+                  <div class="tab-pane fade" id="bookmarksedit">
+                     <br>
+                     <h2>Settings</h2>
+                     <br>
+                     <h4>Tile Color</h4>
+                     <div class="tilecolorselector"></div>
+                     <br>
+                     <button type="button" class="btn btn-info save">Save</button><button type="button" class="btn btn-default cancel">Discard</button>
+                  </div>
+               </div>
+               <div class="edit"><a href="#bookmarksedit" data-placement="left" data-title="Configure" data-toggle="tab"><img src="img/icon-edit.png" class="colorable" data-colorable="background-color"></a></div>
+               <div class="clearfix"></div>
+            </div>
+         </div>
+      </div>
+      
+      <!-- Modals -->
+      <!-- Add Bookmark -->
+      <div class="modal fade" id="addbookmarkmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">Add New Bookmark</h4>
+               </div>
+               <div class="modal-body">
+                  <h4>Bookmark Title</h4>
+                  <input id="addbookmarktitle" type="text" class="form-control" placeholder="Title of Bookmark">
+                  <br>
+                  <h4>Bookmark URL</h4>
+                  <input id="addbookmarkurl" type="text" class="form-control" placeholder="Location of Bookmark">
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
+                  <button type="button" id="addbookmarksave" class="btn btn-info">Save</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+      <!-- Edit Bookmark -->
+      <div class="modal fade" id="editbookmarkmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">Edit Bookmark</h4>
+               </div>
+               <div class="modal-body">
+                  <h4>Bookmark Title</h4>
+                  <input id="editbookmarktitle" type="text" class="form-control" placeholder="Title of Bookmark">
+                  <br>
+                  <h4>Bookmark URL</h4>
+                  <input id="editbookmarkurl" type="text" class="form-control" placeholder="Location of Bookmark">
+               </div>
+               <div class="modal-footer">
+                  <button type="button" id="editbookmarkdelete" class="btn btn-danger">Delete</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" id="editbookmarksave" class="btn btn-info">Save</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+    </div>
+
+   <!-- jQuery -->
+   <script src="js/jquery.min.js"></script>
+   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+   <!-- Bootstrap -->
+   <script src="js/bootstrap.min.js"></script>
+   <!-- Scripts -->
+   <script src="js/moment.min.js"></script>
+   <script src="js/b64.min.js"></script>
+   <script src="js/main.js"></script>
+  </body>
+</html>
