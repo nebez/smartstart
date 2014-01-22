@@ -386,7 +386,7 @@ function populateTileColorSelectors()
    for(var i = 0; i < colors.length; ++i)
    {
       //append to every tilecolorselector there is
-      $(".tilecolorselector").append('<a href="#" class="tilecolor" style="background-color: ' + colors[i] + ';">');
+      $(".tilecolorselector").append('<a href="#" class="tilecolor" style="background-color: ' + colors[i] + ';"></a>');
    }
    
    //Activate all the tilecolor's that are currently being used
@@ -454,6 +454,8 @@ $("#searchbox").keypress(function(e) {
       query = "http://search.yahoo.com/search?p=" + input;
    if(engine == "bing")
       query = "http://bing.com/search?q=" + input;
+   if(engine == "duckduckgo")
+      query = "http://duckduckgo.com/?q=" + input;
       
    window.location.href = query;
 });
