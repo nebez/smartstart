@@ -285,7 +285,7 @@ top:0px;
 border-radius: 6px;
 }
 
-.windows8 #wBall_1 {
+.windows8 .wBall_1 {
 -moz-animation-delay: 0.6s;
 -webkit-animation-delay: 0.6s;
 -ms-animation-delay: 0.6s;
@@ -293,7 +293,7 @@ border-radius: 6px;
 animation-delay: 0.6s;
 }
 
-.windows8 #wBall_2 {
+.windows8 .wBall_2 {
 -moz-animation-delay: 0.12s;
 -webkit-animation-delay: 0.12s;
 -ms-animation-delay: 0.12s;
@@ -301,7 +301,7 @@ animation-delay: 0.6s;
 animation-delay: 0.12s;
 }
 
-.windows8 #wBall_3 {
+.windows8 .wBall_3 {
 -moz-animation-delay: 0.24s;
 -webkit-animation-delay: 0.24s;
 -ms-animation-delay: 0.24s;
@@ -309,7 +309,7 @@ animation-delay: 0.12s;
 animation-delay: 0.24s;
 }
 
-.windows8 #wBall_4 {
+.windows8 .wBall_4 {
 -moz-animation-delay: 0.36s;
 -webkit-animation-delay: 0.36s;
 -ms-animation-delay: 0.36s;
@@ -317,7 +317,7 @@ animation-delay: 0.24s;
 animation-delay: 0.36s;
 }
 
-.windows8 #wBall_5 {
+.windows8 .wBall_5 {
 -moz-animation-delay: 0.48s;
 -webkit-animation-delay: 0.48s;
 -ms-animation-delay: 0.48s;
