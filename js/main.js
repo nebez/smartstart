@@ -679,13 +679,21 @@ $("#bookmarks").children(".content").children(".inner").children("ul").on("click
 
 function showAddModal()
 {
-   //Clear the inputs and show it!
+   //Clear the inputs, hide errors and show it!
    $("#addbookmarkmodal input").val("");
+   $(".blankalert").hide();
    $("#addbookmarkmodal").modal();
 }
 
 //Handle the save button of add model
 $("#addbookmarksave").click(function() {
+   //Did they leave any fields blank?
+   if($("#addbookmarkmodal #addbookmarktitle").val().trim().length == 0 || $("#addbookmarkmodal #addbookmarkurl").val().trim().length == 0)
+   {
+      //They've left a field blank
+      $(".blankalert").show();
+      return false;
+   }
    //Add a new bookmark
    var favhtml = '<li class="colorable" data-colorable="background-color"><a href="'+ $("#addbookmarkurl").val() +'" class="editfav">'+ $("#addbookmarktitle").val() +'</a></li>';
    $("#bookmarks").children(".content").children(".inner").children("ul").append(favhtml);
@@ -704,13 +712,22 @@ $("#addbookmarksave").click(function() {
 
 function showEditModal(bookmark)
 {
-   //Fill inputs and show it
+   //Fill inputs, hide any errors, and show it
    $("#editbookmarkmodal #editbookmarktitle").val(bookmark.text());
    $("#editbookmarkmodal #editbookmarkurl").val(bookmark.attr("href"));
+   $(".blankalert").hide();
    $("#editbookmarkmodal").modal();
    
    //Handle the save button
    $("#editbookmarksave").click(function() {
+      //Did they leave anything blank?
+      if($("#editbookmarkmodal #editbookmarktitle").val().trim().length == 0 || $("#editbookmarkmodal #editbookmarkurl").val().trim().length == 0)
+      {
+         //They've left a field blank
+         $(".blankalert").show();
+         return false;
+      }
+      
       bookmark.text($("#editbookmarkmodal #editbookmarktitle").val());
       bookmark.attr("href", $("#editbookmarkmodal #editbookmarkurl").val());
       
