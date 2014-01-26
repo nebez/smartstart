@@ -515,7 +515,7 @@ function getWeather(location,units)
    $("#weatherview .loader").show();
    
    //Go for it
-   var apiurl = "http://api.openweathermap.org/data/2.5/weather?test&q="+location+"&units="+units+"&callback=?";
+   var apiurl = "http://api.openweathermap.org/data/2.5/weather?q="+location+"&units="+units+"&callback=?";
    var jqxhr = $.ajax({type: 'GET', url: apiurl, async: true, contentType: 'application/json', jsonpCallback: 'callbackweather', dataType: 'jsonp', cache: true })
       .done(function(json) {
          //We're good! return the temperature and conditions
