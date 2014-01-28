@@ -529,7 +529,12 @@ function getWeather(location,units)
          for(var i=0; i<json.weather.length; i++)
          {
             //Loop through all conditions and put them together
-            condition += parseWeatherCondition(json.weather[i].id);
+            var newcondition = parseWeatherCondition(json.weather[i].id);
+            condition += newcondition;
+            
+            //log if newcondition is blank
+            if(newcondition == "")
+               console.error("Unhandled weather condition: " + JSON.stringify(json.weather[i]));
             
             //add commas where necessary
             if(i + 1 < json.weather.length)
@@ -544,7 +549,6 @@ function getWeather(location,units)
          $("#weatherview .loader").hide();
          $("#weatherview h1").show();
          $("#weatherview h4").show();
-         console.log(json);
       })
       .fail(function() {
          console.error( jqxhr );
@@ -556,7 +560,6 @@ function getWeather(location,units)
 
 function parseWeatherCondition(condition)
 {
-   console.log(condition);
    //http://openweathermap.org/wiki/API/Weather_Condition_Codes
    if(condition == 200 || condition == 201 || condition == 202 || condition == 230 || condition == 231 || condition == 232)
       return "Thunderstorm & Rainy";
@@ -608,6 +611,9 @@ function parseWeatherCondition(condition)
       return "Extreme Wind";
    if(condition == 906)
       return "Extreme Hail";
+      
+   //If all else fails...
+   return "";
 }
 
 
