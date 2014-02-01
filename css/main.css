@@ -196,7 +196,7 @@ h4
    padding: 10px;
 }
 
-#reddit .table td.rating
+#reddit .table td.rating a
 {
    vertical-align: middle;
    color: #e16161;
