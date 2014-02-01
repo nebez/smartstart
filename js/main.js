@@ -486,7 +486,7 @@ function getRedditPosts(subreddit, postlimit)
          //Time to populate
          for(var i = 0; i < json.data.children.length; i++)
          {
-            var posthtml = '<tr><td class="colorable rating text-center" data-colorable="color">'+json.data.children[i].data.score+'</td><td><a href="'+json.data.children[i].data.url+'">'+json.data.children[i].data.title+'</a></td></tr>';
+            var posthtml = '<tr><td class="colorable rating text-center" data-colorable="color"><a href="http://reddit.com'+json.data.children[i].data.permalink+'">'+json.data.children[i].data.score+'</a></td><td><a href="'+json.data.children[i].data.url+'">'+json.data.children[i].data.title+'</a></td></tr>';
             $("#redditposts").children("tbody").append(posthtml);
          }
          
