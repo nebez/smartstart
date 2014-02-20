@@ -36,16 +36,16 @@ $(document).ready(function(){
 
    //Re-arrange our tiles if necessary
    reArrangeTiles();
-   
+
    //Init our edit tooltips and handle their clicks
    $(".edit a").tooltip();
-   
+
    //Populate our tile color selectors
    populateTileColorSelectors();
-   
+
    //Show project info dialog... maybe?
    showProjectInfo();
-   
+
    //Finally, Focus the search box
    $("#searchbox").focus();
 });
@@ -76,7 +76,7 @@ function loadSettings(tile)
    //Sanity check, make sure there's no # in front
    if(tile.charAt(0) == "#")
       tile = tile.substr(1);
-   
+
    //Can we access localStorage?
    if(typeof(Storage)!=="undefined" && window.localStorage != null)
    {
@@ -98,7 +98,7 @@ function loadSettings(tile)
                //Load it up with both data() and attr() (just in case, seems like a weird jQuery thing where attr(data-*) doesn't update data(*) and vice versa)
                tileelement.data(d, localStorage[tile + "-" + d]);
                tileelement.attr("data-" + d, localStorage[tile + "-" + d]);
-               
+
                //Populate the input fields (format: #boxname-inputname, ex: weather-units)
                $("#" + tile + "-" + d).val(tileelement.attr("data-" + d));
                //console.log("Loading [" + tile + "-" + d + "] = " + tileelement.attr("data-" + d));
@@ -111,7 +111,7 @@ function loadSettings(tile)
       //Nope... can't load from localStorage.
       //Should we tell them ? :(
    }
-   
+
    //Let's load up some of the more specific settings (aside from tileColor, it's handled in reColorTiles())
    switch(tile.toLowerCase())
    {
@@ -145,7 +145,7 @@ function saveSettings(tile, alert)
    //Sanity check, make sure there's no # in front
    if(tile.charAt(0) == "#")
       tile = tile.substr(1);
-   
+
    //Can we access localStorage?
    if(typeof(Storage)!=="undefined" && window.localStorage != null)
    {
@@ -165,7 +165,7 @@ function saveSettings(tile, alert)
             //Move all of the input values into the data fields for saving
             tileelement.attr("data-" + d, $("#" + tile + "-" + d).val());
             tileelement.data(d, $("#" + tile + "-" + d).val());
-            
+
             //Save it!
             localStorage[tile + "-" + d] = tileelement.data(d);
             //console.log("Saving [" + tile + "-" + d + "] = " + tileelement.attr("data-" + d));
@@ -205,7 +205,7 @@ function reArrangeTiles()
 {
    //Note: focus is lost during reArrangeTiles function. We need to try to keep it
    var focused = false;
-   
+
    //We re-arrange tiles based on viewport. On small devices (< 992 px), it goes: greeting, search, time, temperature
    if(viewport().width < 992)
    {
@@ -214,7 +214,7 @@ function reArrangeTiles()
       {
          //Before any moving, should we re-focus after search?
          focused = $("#searchbox").is(":focus");
-         
+
          //Move time to the front
          $(".box").eq(2).parent().insertBefore($(".box").eq(0).parent());
          //Now move search to the front
@@ -230,14 +230,14 @@ function reArrangeTiles()
       {
          //Before any moving, should we re-focus after search?
          focused = $("#searchbox").is(":focus")
-         
+
          //Yes! Let's move temperature to the front
          $(".box").eq(3).parent().insertBefore($(".box").eq(0).parent());
          //Now the time before search
          $(".box").eq(3).parent().insertBefore($(".box").eq(2).parent());
       }
    }
-   
+
    if(focused)
       $("#searchbox").focus();
 }
@@ -285,7 +285,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
    {
       //Swap back to view mode on next click
       e.target.href = e.target.href.replace("edit", "view");
-      
+
       //And a little special something for the bookmarks edit (we handle this one differently... it gets ugly)
       if($(this).parents(".box").attr("id") == "bookmarks")
          editBookmarks();
@@ -295,12 +295,12 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
    {
       //Swap back to edit mode on next click
       e.target.href = e.target.href.replace("view", "edit");
-      
+
       //Load settings (if they've saved, new settings will be loaded. if they've discarded, old settings will be loaded. hayo!)
       var thisid = $(this).parents(".box").attr("id");
       loadSettings(thisid);
    }
-   
+
    //Re-activate the currently selected tile colors
    activateUsedTileColors();
 });
@@ -310,7 +310,7 @@ $("button.save").click(function() {
    //Save!
    var thisid = $(this).parents(".box").attr("id");
    saveSettings(thisid, true);
-   
+
    //Click the edit button to toggle us, the toggle handler will take care of re-loading
    $(this).parents(".box").children(".edit").children("a").tab("show");
 });
@@ -366,12 +366,12 @@ function reColorTiles()
    $(".colorable").each(function() {
       //find the new color to apply
       var newcolor;
-      
+
       if($(this).attr("data-tilecolor") != null)
          newcolor = $(this).attr("data-tilecolor");
       else
          newcolor = $(this).parents(".box").attr("data-tilecolor");
-      
+
       //apply it to the specified css style
       $(this).css($(this).attr("data-colorable"), newcolor);
    });
@@ -388,7 +388,7 @@ function populateTileColorSelectors()
       //append to every tilecolorselector there is
       $(".tilecolorselector").append('<a href="#" class="tilecolor" style="background-color: ' + colors[i] + ';"></a>');
    }
-   
+
    //Activate all the tilecolor's that are currently being used
    activateUsedTileColors();
 }
@@ -406,13 +406,13 @@ $(".tilecolorselector").on("click", "a", function(e) {
    //Deactivate old tile and activate this one instead
    $(this).parent().children("a.tilecolor").removeClass("active");
    $(this).addClass("active");
-   
+
    //Update the color live! Set tilecolor data and reColor
    var newcolor = $(this).css("background-color");
    $(this).parents(".box").attr("data-tilecolor", newcolor);
    $(this).parents(".box").data("tilecolor", newcolor);
    reColorTiles();
-   
+
    e.preventDefault();
 });
 
@@ -456,7 +456,7 @@ $("#searchbox").keypress(function(e) {
       query = "http://bing.com/search?q=" + input;
    if(engine == "duckduckgo")
       query = "http://duckduckgo.com/?q=" + input;
-      
+
    window.location.href = query;
 });
 
@@ -465,34 +465,44 @@ $("#searchbox").keypress(function(e) {
 //Reddit
 /////////////////////////////////////////////
 
+function ajaxDidError(statusCode, errorThrown) {
+     if (statusCode.status == 0) {
+         // user is offline, hide loader animations
+         $(".loader").hide();
+         $("#subname").html("<small>You are offline</small>").show();
+         $("#weatherview h1").html("<small>You are offline</small>").show();
+         $("#weatherview h4").hide();
+     }
+ }
+
 function getRedditPosts(subreddit, postlimit)
 {
    //Show the loader until we can get the data
    $("#redditposts").hide();
    $("#reddit .loader").show();
-   
+
    //Title
    $("#subname").text(subreddit);
-   
+
    //Get the reddit posts!
    //http://www.reddit.com/r/pathofexile.json?limit=5&jsonp=none
    var apiurl = "http://reddit.com"+subreddit+".json?limit="+postlimit+"&jsonp=?";
-   var jqxhr = $.ajax({type: 'GET', url: apiurl, async: true, contentType: 'application/json', jsonpCallback: 'jsonp', dataType: 'jsonp', cache: true })
+   var jqxhr = $.ajax({type: 'GET', error:ajaxDidError, timeout: 8000, url: apiurl, async: true, contentType: 'application/json', jsonpCallback: 'jsonp', dataType: 'jsonp', cache: true })
       .done(function(json) {
          //We're good! Assemble the list of reddit posts
          //Empty it out first just in case
          $("#redditposts").children("tbody").empty()
-         
+
          //Time to populate
          for(var i = 0; i < json.data.children.length; i++)
          {
             var posthtml = '<tr><td class="colorable rating text-center" data-colorable="color"><a href="http://reddit.com'+json.data.children[i].data.permalink+'" data-toggle="tooltip" data-placement="bottom" title="View Comments" class="commentanchor">'+json.data.children[i].data.score+'</a></td><td><a href="'+json.data.children[i].data.url+'">'+json.data.children[i].data.title+'</a></td></tr>';
             $("#redditposts").children("tbody").append(posthtml);
          }
-         
+
          //Init the tooltips
          $(".commentanchor").tooltip();
-         
+
          //Show the posts and hide the loader
          $("#reddit .loader").hide();
          $("#redditposts").show();
@@ -516,38 +526,38 @@ function getWeather(location,units)
    $("#weatherview h1").hide();
    $("#weatherview h4").hide();
    $("#weatherview .loader").show();
-   
+
    //Go for it
    var apiurl = "http://api.openweathermap.org/data/2.5/weather?q="+location+"&units="+units+"&callback=?";
-   var jqxhr = $.ajax({type: 'GET', url: apiurl, async: true, contentType: 'application/json', jsonpCallback: 'callbackweather', dataType: 'jsonp', cache: true })
+   var jqxhr = $.ajax({type: 'GET', error:ajaxDidError, timeout: 8000, url: apiurl, async: true, contentType: 'application/json', jsonpCallback: 'callbackweather', dataType: 'jsonp', cache: true })
       .done(function(json) {
          //We're good! return the temperature and conditions
-         var temp = json.main.temp.toFixed(1) + "&deg;";
+         var temp = null;
          if(units == "metric")
-            temp += "c";
+            temp = json.main.temp.toFixed(1) + "&deg;c";
          else
-            temp += "f";
-         
+            temp = json.main.temp.toFixed(0) + "&deg;f";
+
          var condition = "";
          for(var i=0; i<json.weather.length; i++)
          {
             //Loop through all conditions and put them together
             var newcondition = parseWeatherCondition(json.weather[i].id);
             condition += newcondition;
-            
+
             //log if newcondition is blank
             if(newcondition == "")
                console.error("Unhandled weather condition: " + JSON.stringify(json.weather[i]));
-            
+
             //add commas where necessary
             if(i + 1 < json.weather.length)
                condition += ", ";
          }
-         
+
          //update the weather tile!
          $("#weather #temperature").html(temp);
          $("#weather #condition").text(condition);
-         
+
          //Show us!
          $("#weatherview .loader").hide();
          $("#weatherview h1").show();
@@ -570,27 +580,27 @@ function parseWeatherCondition(condition)
       return "Thunderstorm";
    if(condition == 212)
       return "Heavy Thunderstorm";
-      
+
    if(condition >= 300 && condition <= 321)
       return "Drizzle";
-      
+
    if(condition == 500 || condition == 501 || condition == 520)
       return "Rainy";
    if(condition == 502 || condition == 503 || condition == 504 || condition == 521 || condition == 522)
       return "Heavy Rain";
    if(condition == 504)
       return "Freezing Rain";
-   
+
    if(condition == 600 || condition == 620)
       return "Light Snow";
    if(condition == 601 || condition == 611 || condition == 621)
       return "Snowy";
    if(condition == 602)
       return "Heavy Snow";
-      
+
    if(condition >= 701 && condition <= 741)
       return "Foggy";
-      
+
    if(condition == 800)
       return "Clear Skies";
    if(condition == 801)
@@ -599,7 +609,7 @@ function parseWeatherCondition(condition)
       return "Cloudy";
    if(condition == 804)
       return "Overcast";
-      
+
    if(condition == 900)
       return "Tornado";
    if(condition == 901)
@@ -614,7 +624,7 @@ function parseWeatherCondition(condition)
       return "Extreme Wind";
    if(condition == 906)
       return "Extreme Hail";
-      
+
    //If all else fails...
    return "";
 }
@@ -627,10 +637,10 @@ function populateBookmarks(b64favs)
 {
    //Decode the favorites back into json
    var favs = $.parseJSON(Base64.decode(b64favs));
-   
+
    //Clear the current content just in case
    $("#bookmarks").children(".content").children(".inner").children("ul").empty();
-   
+
    //Populate it back up again
    $("#bookmarkcount").text(favs.bookmarks.length + " Sites Bookmarked");
    for(var i = 0; i < favs.bookmarks.length; i++)
@@ -638,20 +648,20 @@ function populateBookmarks(b64favs)
       var favhtml = '<li class="colorable" data-colorable="background-color"><a href="'+favs.bookmarks[i].url+'" class="editfav">'+favs.bookmarks[i].title+'</a></li>';
       $("#bookmarks").children(".content").children(".inner").children("ul").append(favhtml);
    }
-   
+
    //Make them sortable (we must do this every time bookmarks are populated since new DOM elements are being created each time)
    $("#bookmarks .inner ul").sortable({
       start: function(e, ui ){
          //Set the height to 0
          ui.placeholder.height(0);
       },
-      
+
       //Whenever we're updated/moved/etc, call updateBookmarks to replicate the changes in the back end
       update: function(e, ui) {
          updateBookmarks();
       }
    });
-   
+
    //Disable sortability
    $("#bookmarks .inner ul").sortable("disable");
 }
@@ -661,10 +671,10 @@ function editBookmarks()
    //Add a + button to the inner content
    var addhtml = '<li class="colorable" data-colorable="background-color" ><a href="#" class="addfav">+</a></li>';
    $("#bookmarks").children(".content").children(".inner").children("ul").append(addhtml);
-   
+
    //We have to recolor here or the + button won't show
    reColorTiles();
-   
+
    //Make us sortable!
    $("#bookmarks .inner ul").sortable("enable");
 }
@@ -710,16 +720,16 @@ $("#addbookmarksave").click(function() {
    //Add a new bookmark
    var favhtml = '<li class="colorable" data-colorable="background-color"><a href="'+ $("#addbookmarkurl").val() +'" class="editfav">'+ $("#addbookmarktitle").val() +'</a></li>';
    $("#bookmarks").children(".content").children(".inner").children("ul").append(favhtml);
-   
+
    //Now move the + button back to the end
    $("#bookmarks .content .inner ul li:last").insertAfter($("#bookmarks .content .inner ul li").eq($("#bookmarks .content .inner ul li").length - 3));
-   
+
    //recolor tiles (again) :(
    reColorTiles();
-   
+
    //Now hide the modal up again
    $("#addbookmarkmodal").modal("hide");
-   
+
    updateBookmarks();
 });
 
@@ -730,7 +740,7 @@ function showEditModal(bookmark)
    $("#editbookmarkmodal #editbookmarkurl").val(bookmark.attr("href"));
    $(".blankalert").hide();
    $("#editbookmarkmodal").modal();
-   
+
    //Handle the save button
    $("#editbookmarksave").click(function() {
       //Did they leave anything blank?
@@ -740,24 +750,24 @@ function showEditModal(bookmark)
          $(".blankalert").show();
          return false;
       }
-      
+
       bookmark.text($("#editbookmarkmodal #editbookmarktitle").val());
       bookmark.attr("href", $("#editbookmarkmodal #editbookmarkurl").val());
-      
+
       //Now hide the modal up again
       $("#editbookmarkmodal").modal("hide");
-      
+
       updateBookmarks();
    });
-   
+
    //Handle the delete button
    $("#editbookmarkdelete").click(function() {
       //Remove us!
       bookmark.parent().remove();
-      
+
       //Now hide the modal up again
       $("#editbookmarkmodal").modal("hide");
-      
+
       updateBookmarks();
    });
 }
@@ -782,7 +792,7 @@ function updateBookmarks()
       };
       bookmarks.push(tempobj);
    }
-   
+
    //JSON Stringify, encode, and stuff it into data with both data() and attr()
    var encbookmarks = Base64.encode(JSON.stringify({ "bookmarks": bookmarks }));
    $("#bookmarks").data("encodedbookmarks", encbookmarks);
