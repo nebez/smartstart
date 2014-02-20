@@ -44,7 +44,7 @@ $(document).ready(function () {
     showProjectInfo();
 
     //Finally, Focus the search box
-    $("#searchbox").focus();
+    $("#websearchbox").focus();
 });
 
 function showProjectInfo() {
@@ -186,7 +186,7 @@ function reArrangeTiles() {
         //We're in small viewport mode! Re-arrange if it hasn't already been re-arranged (aka: search is in spot: 4)
         if ($(".box").eq(3).attr("id") == "search") {
             //Before any moving, should we re-focus after search?
-            focused = $("#searchbox").is(":focus");
+            focused = $("#websearchbox").is(":focus");
 
             //Move time to the front
             $(".box").eq(2).parent().insertBefore($(".box").eq(0).parent());
@@ -199,7 +199,7 @@ function reArrangeTiles() {
         //We're in normal viewport. Do we need to re-arrange (is search in spot 2)?
         if ($(".box").eq(1).attr("id") == "search") {
             //Before any moving, should we re-focus after search?
-            focused = $("#searchbox").is(":focus")
+            focused = $("#websearchbox").is(":focus")
 
             //Yes! Let's move temperature to the front
             $(".box").eq(3).parent().insertBefore($(".box").eq(0).parent());
@@ -209,7 +209,7 @@ function reArrangeTiles() {
     }
 
     if (focused)
-        $("#searchbox").focus();
+        $("#websearchbox").focus();
 }
 
 //Get viewport size
@@ -405,17 +405,17 @@ $(".form-control").focusout(function () {
 
 
 /////////////////////////////////////////////
-//Search box
+// Web Search box
 /////////////////////////////////////////////
 
-//On pressing enter while searching
-$("#searchbox").keypress(function (e) {
+//On pressing enter while searching in web box
+$("#websearchbox").keypress(function (e) {
     //Make sure they've pressed enter
     if (e.which != 13)
         return;
     //Which search engine are we using?
     var engine = $("#search").attr("data-searchengine");
-    var input = $("#searchbox").val();
+    var input = $("#websearchbox").val().trim();
     var query;
     if (engine == "google")
         query = "http://google.com/search?q=" + input;
@@ -427,6 +427,21 @@ $("#searchbox").keypress(function (e) {
         query = "http://duckduckgo.com/?q=" + input;
 
     window.location.href = query;
+});
+
+
+/////////////////////////////////////////////
+// Wiki box
+/////////////////////////////////////////////
+
+//On pressing enter while searching in web box
+$("#wikisearchbox").keypress(function (e) {
+    //Make sure they've pressed enter
+    if (e.which != 13)
+        return;
+
+    var input = $("#websearchbox").val().trim();
+    window.location.href = 'http://en.wikipedia.org/wiki/Special:Search?search=' + input;
 });
 
 
