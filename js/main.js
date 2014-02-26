@@ -450,6 +450,10 @@ $("#wikisearchbox").keypress(function (e) {
 /////////////////////////////////////////////
 
 function ajaxDidError(statusCode, errorThrown) {
+    // console.log('ajaxDidError');
+    // console.log(statusCode);
+    // console.log(statusCode.status);
+    // console.log(errorThrown);
     if (statusCode.status == 0) {
         // user is offline, hide loader animations
         $(".loader").hide();
@@ -534,29 +538,39 @@ function getWeather(location, units) {
         .done(function (json) {
             //We're good! return the temperature and conditions
             var temp = null;
-            if (units == "metric")
-                temp = json.main.temp.toFixed(1) + "&deg;c";
-            else
-                temp = json.main.temp.toFixed(0) + "&deg;f";
+            // console.log(json);
 
-            var condition = "";
-            for (var i = 0; i < json.weather.length; i++) {
-                //Loop through all conditions and put them together
-                var newcondition = parseWeatherCondition(json.weather[i].id);
-                condition += newcondition;
+            if (json['message']) {
+                // looks like we got an error message
+                $("#weather #temperature").html('');
+                $("#weather #condition").text(json['message']);
 
-                //log if newcondition is blank
-                if (newcondition == "")
-                    console.error("Unhandled weather condition: " + JSON.stringify(json.weather[i]));
+            } else {
 
-                //add commas where necessary
-                if (i + 1 < json.weather.length)
-                    condition += ", ";
+                if (units == "metric")
+                    temp = json.main.temp.toFixed(1) + "&deg;c";
+                else
+                    temp = json.main.temp.toFixed(0) + "&deg;f";
+
+                var condition = "";
+                for (var i = 0; i < json.weather.length; i++) {
+                    //Loop through all conditions and put them together
+                    var newcondition = parseWeatherCondition(json.weather[i].id);
+                    condition += newcondition;
+
+                    //log if newcondition is blank
+                    if (newcondition == "")
+                        console.error("Unhandled weather condition: " + JSON.stringify(json.weather[i]));
+
+                    //add commas where necessary
+                    if (i + 1 < json.weather.length)
+                        condition += ", ";
+                }
+
+                //update the weather tile!
+                $("#weather #temperature").html(temp);
+                $("#weather #condition").text(condition);
             }
-
-            //update the weather tile!
-            $("#weather #temperature").html(temp);
-            $("#weather #condition").text(condition);
 
             //Show us!
             $("#weatherview .loader").hide();
