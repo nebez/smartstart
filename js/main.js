@@ -34,6 +34,9 @@ $(document).ready(function () {
     //Re-arrange our tiles if necessary
     reArrangeTiles();
 
+    // Lookup our IP, if possible
+    updateIP();
+
     //Init our edit tooltips and handle their clicks
     $(".edit a").tooltip();
 
@@ -45,7 +48,24 @@ $(document).ready(function () {
 
     //Finally, Focus the search box
     $("#websearchbox").focus();
+
 });
+
+function updateIP() {
+    $.getJSON("http://jsonip.appspot.com?callback=?", function(data){
+        // alert( "Your ip: " + data.ip);
+        var myip = data.ip;
+        $("#greeting #ip").html("IP: " + myip);
+
+        // now geolocate
+        $.getJSON("http://freegeoip.net/json/" + myip, function(data){
+
+            $("#greeting #ip").html("IP: " + myip + "<br />(" + data.city + " " + data.region_name + ", " + data.country_code + ")");
+
+        });
+
+    });
+}
 
 function showProjectInfo() {
     if (window.location.host.toLowerCase().indexOf("nebezb.com") != -1) {
